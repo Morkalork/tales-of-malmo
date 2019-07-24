@@ -1,0 +1,20 @@
+[
+  {
+    "name": "Leendet",
+    "attributes": [
+      {
+        "charisma": 1
+      }
+    ],
+    "description": "Ett djävulskt leende som får de mest barbariska supporterskaror att vekna i ett lätt fniss"
+  },
+  {
+    "name": "Ungdomsproffs",
+    "attributes": [
+      {
+        "strength": 1
+      }
+    ],
+    "description": "Tuffa år utomlands vid späd ålder har tuffat till denna spoling"
+  }
+]

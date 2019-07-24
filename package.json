@@ -1,5 +1,6 @@
 {
   "name": "tales-of-malmo",
+  "description": "The epic story of Malmö FF, now playable in a browser near you!",
   "version": "0.1.0",
   "private": true,
   "scripts": {

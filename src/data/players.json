@@ -1,0 +1,58 @@
+[
+  {
+    "level": 1,
+    "name": "Tim Prica",
+    "position": "Anfallare",
+    "attributes": {
+      "charisma": 2,
+      "constitution": 1,
+      "dexterity": 2,
+      "strength": 3,
+      "intelligence": 2
+    },
+    "bonuses": [],
+    "image": "tim-prica.jpg"
+  },
+  {
+    "level": 1,
+    "name": "Anel Ahmedhodzic",
+    "position": "Försvarare",
+    "attributes": {
+      "charisma": 1,
+      "constitution": 3,
+      "dexterity": 3,
+      "strength": 2,
+      "intelligence": 1
+    },
+    "bonuses": ["Ungdomsproffs"],
+    "image": "anel-ahmedhodzic.jpg"
+  },
+  {
+    "level": 1,
+    "name": "Pavle Vagic",
+    "position": "Mittfältare",
+    "attributes": {
+      "charisma": 1,
+      "constitution": 2,
+      "dexterity": 2,
+      "strength": 3,
+      "intelligence": 2
+    },
+    "bonuses": [],
+    "image": "pavle-vagic.jpg"
+  },
+  {
+    "level": 1,
+    "name": "Hugo Andersson",
+    "position": "Försvarare",
+    "attributes": {
+      "charisma": 1,
+      "constitution": 3,
+      "dexterity": 2,
+      "strength": 3,
+      "intelligence": 1
+    },
+    "bonuses": [],
+    "image": "hugo-andersson.jpg"
+  }
+]
