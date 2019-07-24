@@ -5,8 +5,8 @@
 </template>
 
 <script>
-import MainHeader from "./MainHeader";
-import GameSegment from "./GameSegment";
+import MainHeader from "../components/MainHeader";
+import GameSegment from "../components/GameSegment";
 export default {
   name: "Intro",
   components: { GameSegment, MainHeader },

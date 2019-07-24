@@ -1,17 +1,20 @@
 <template>
   <div id="app">
-    <intro />
+    <router-view />
   </div>
 </template>
 
 <script>
-import Intro from "./components/Intro";
+import { mapState } from "vuex";
 
 export default {
-  name: "app",
-  components: {
-    Intro
-  }
+  name: "App",
+  updated() {
+    console.log(this);
+  },
+  computed: mapState({
+    notification: state => state.notification
+  })
 };
 </script>
 

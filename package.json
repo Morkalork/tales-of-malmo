@@ -1,17 +1,22 @@
 {
   "name": "tales-of-malmo",
-  "description": "The epic story of Malmö FF, now playable in a browser near you!",
   "version": "0.1.0",
   "private": true,
+  "description": "The epic story of Malmö FF, now playable in a browser near you!",
   "scripts": {
-    "serve": "vue-cli-service serve",
+    "serve": "vue-cli-service build --mode development --watch",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "test:unit": "vue-cli-service test:unit"
   },
   "dependencies": {
+    "@types/express": "^4.17.0",
+    "@types/node": "^12.6.8",
+    "compression": "^1.7.4",
     "core-js": "^2.6.5",
+    "express": "^4.17.1",
     "vue": "^2.6.10",
+    "vue-router": "^3.0.3",
     "vuex": "^3.0.1"
   },
   "devDependencies": {

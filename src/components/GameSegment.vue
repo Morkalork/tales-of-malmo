@@ -5,7 +5,9 @@
     </div>
     <div class="game-segment--buttons">
       <div v-for="(button, index) in buttons" v-bind:key="index">
-        <a :href="'/' + button.route">{{ button.title }}</a>
+        <router-link tag="a" :to="button.route">
+          {{ button.title }}
+        </router-link>
       </div>
     </div>
   </div>
@@ -33,12 +35,16 @@ export default {
   width: 100%;
   min-height: 100%;
   .game-segment--content {
-    min-height: 85vh;
+    min-height: calc(85vh - 2rem);
+    padding: 1rem 0;
     color: $blue-3;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
   }
 
   .game-segment--buttons {
-    $button-border: 2px rgba($blue-2, 0.25) solid;
+    $button-border: 2px rgba($white, 0.25) solid;
 
     height: calc(15vh - 2rem);
     padding: 1rem 0;
@@ -58,16 +64,17 @@ export default {
       }
 
       a {
-        color: $blue-3;
+        color: $white;
         text-decoration: none;
         user-select: none;
+        font-weight: bold;
 
         &:active {
-          color: rgba($blue-3, 0.5);
+          color: rgba($white, 0.5);
           -webkit-tap-highlight-color: transparent;
         }
         &:visited {
-          color: $blue-3;
+          color: $white;
         }
       }
     }
