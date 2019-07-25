@@ -14,9 +14,10 @@ const notificationModule = {
   },
   mutations: {
     [SET_NOTIFICATION](state, { title, message, notificationType }) {
+      console.log("MUTATING!");
       state.title = title || notificationType;
       state.message = message;
-      state.errorType = notificationType;
+      state.notificationType = notificationType;
     },
     [CLEAR_NOTIFICATION](state) {
       state.title = "";
@@ -26,10 +27,12 @@ const notificationModule = {
   },
   actions: {
     setNotification({ commit }, data) {
+      console.log("Trying with ", data);
       if (!Object.values(NOTIFICATION_TYPES).includes(data.notificationType)) {
         throw new Error(`Invalid notification type ${!data.notificationType}`);
       }
 
+      console.log("Setting data to ", data);
       commit(SET_NOTIFICATION, data);
     },
     clearNotification({ commit }) {

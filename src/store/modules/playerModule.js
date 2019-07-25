@@ -1,4 +1,4 @@
-import { NOTIFICATION_TYPES, SET_NOTIFICATION } from "./notificationModule";
+import { NOTIFICATION_TYPES } from "./notificationModule";
 
 export const SET_PLAYERS = "SET_PLAYERS";
 
@@ -18,16 +18,17 @@ const playerModule = {
     }
   },
   actions: {
-    loadPlayers({ commit }) {
-      fetch("/data/players.json2")
+    loadPlayers({ commit, dispatch }) {
+      fetch("/public/data/players.json")
         .then(response => response.json())
         .then(players => {
           commit(SET_PLAYERS, players);
         })
         .catch(() =>
-          commit(SET_NOTIFICATION, {
-            message: "Kunde inte hämta spelardata",
-            errorType: NOTIFICATION_TYPES.ERROR
+          dispatch("setNotification", {
+            message:
+              "Kunde inte hämta spelardata, jag har ingen aning om hur jag ska hantera detta... :(",
+            notificationType: NOTIFICATION_TYPES.ERROR
           })
         );
     }

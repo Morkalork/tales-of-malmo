@@ -1,20 +1,27 @@
 <template>
   <div id="app">
     <router-view />
+    <notification
+      v-if="notification.title !== ''"
+      :title="notification.title"
+      :message="notification.message"
+      :notification-type="notification.notificationType"
+    />
   </div>
 </template>
 
 <script>
 import { mapState } from "vuex";
+import Notification from "./components/Notification";
 
 export default {
   name: "App",
-  updated() {
-    console.log(this);
-  },
-  computed: mapState({
-    notification: state => state.notification
-  })
+  components: { Notification },
+  computed: {
+    ...mapState({
+      notification: state => state.notification
+    })
+  }
 };
 </script>
 
@@ -43,5 +50,6 @@ body {
   max-width: 1024px;
   box-shadow: 0 0 1rem $blue-3;
   margin: 0 auto;
+  position: relative;
 }
 </style>

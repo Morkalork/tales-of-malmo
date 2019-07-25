@@ -1,7 +1,8 @@
 <template>
   <div class="init">
     <GameSegment :buttons="buttons">
-      <loading-icon v-if="characters.length === 0" />
+      <loading-icon v-if="players.length === 0" />
+      <player-select-list v-if="players.length > 0" :players="players" />
     </GameSegment>
   </div>
 </template>
@@ -10,9 +11,10 @@
 import GameSegment from "../components/GameSegment";
 import LoadingIcon from "../components/LoadingIcon";
 import { mapActions, mapState } from "vuex";
+import PlayerSelectList from "../components/Player/PlayerSelectList";
 export default {
   name: "Init",
-  components: { LoadingIcon, GameSegment },
+  components: { PlayerSelectList, LoadingIcon, GameSegment },
   data() {
     return {
       buttons: [
@@ -24,16 +26,17 @@ export default {
     };
   },
   created() {
-    console.log("Loading players!", this);
     this.loadPlayers();
+    this.loadBonuses();
   },
   methods: {
     ...mapActions({
-      loadPlayers: "loadPlayers"
+      loadPlayers: "loadPlayers",
+      loadBonuses: "loadBonuses"
     })
   },
   computed: mapState({
-    characters: state => state.players.youth
+    players: state => state.players.youth
   })
 };
 </script>

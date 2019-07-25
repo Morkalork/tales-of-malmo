@@ -36,7 +36,7 @@ export default {
   min-height: 100%;
   .game-segment--content {
     min-height: calc(85vh - 2rem);
-    padding: 1rem 0;
+    padding: 1rem;
     color: $blue-3;
     display: flex;
     justify-content: center;
