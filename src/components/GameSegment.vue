@@ -3,7 +3,7 @@
     <div class="game-segment--content">
       <slot />
     </div>
-    <div class="game-segment--buttons">
+    <div class="game-segment--buttons" v-if="buttons.length > 0">
       <div
         v-for="(button, index) in buttons"
         v-bind:key="index"
@@ -24,11 +24,14 @@ export default {
     title: String,
     buttons: {
       type: Array,
-      default: () => ({
+      default: () => []
+      /*
+      {
         title: "",
         route: "",
         isError: false
-      })
+      }
+       */
     }
   }
 };

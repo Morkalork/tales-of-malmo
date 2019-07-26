@@ -33,12 +33,10 @@ export default {
   },
   created() {
     this.loadPlayers();
-    this.loadBonuses();
   },
   methods: {
     ...mapActions({
-      loadPlayers: "loadPlayers",
-      loadBonuses: "loadBonuses"
+      loadPlayers: "loadPlayers"
     }),
     onError: function() {
       this.buttons[0].title = "Du måste ha exakt två spelare valda";

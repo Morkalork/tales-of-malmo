@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <top-menu />
     <router-view />
     <notification
       v-if="notification.title !== ''"
@@ -11,12 +12,21 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapActions, mapState } from "vuex";
 import Notification from "./components/Notification";
+import TopMenu from "./components/TopMenu";
 
 export default {
   name: "App",
-  components: { Notification },
+  components: { TopMenu, Notification },
+  created() {
+    this.loadBonuses();
+  },
+  methods: {
+    ...mapActions({
+      loadBonuses: "loadBonuses"
+    })
+  },
   computed: {
     ...mapState({
       notification: state => state.notification
@@ -39,16 +49,19 @@ body {
   margin: 0;
   padding: 0;
   height: 100%;
+  background-color: $blue;
+}
+
+a {
+  text-decoration: none;
 }
 
 #app {
   font-family: "Neucha", cursive;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: $blue;
   min-height: 100%;
   max-width: 1024px;
-  box-shadow: 0 0 1rem $blue-3;
   margin: 0 auto;
   position: relative;
 }

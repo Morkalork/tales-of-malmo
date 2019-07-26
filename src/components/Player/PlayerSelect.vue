@@ -83,7 +83,7 @@ export default {
   width: calc(50% - 1rem - 8px);
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   border: 4px rgba($white, 0.25) dashed;
   border-radius: $border-radius;
 
