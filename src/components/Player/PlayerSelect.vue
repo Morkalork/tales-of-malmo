@@ -1,25 +1,30 @@
 <template>
   <div class="player-select">
-    <div class="player-select--portrait" v-on:click="toggleAttributes">
-      <img :src="imageSrc" alt="player.name" />
-      <div :class="getAttributeClasses">
-        <div>
-          <ul>
-            <player-select-attribute
-              v-for="attribute in attributes"
-              :key="attribute.name"
-              :name="attribute.name"
-              :value="attribute.value"
-              :bonuses="player.bonuses"
-            />
-          </ul>
-          <player-select-bonuses :bonuses="player.bonuses" />
+    <div class="player-select--inner">
+      <div class="player-select--portrait" v-on:click="toggleAttributes">
+        <p class="player-select--info-icon">
+          <i class="fas fa-info-circle"></i>
+        </p>
+        <img :src="imageSrc" alt="player.name" />
+        <div :class="getAttributeClasses">
+          <div>
+            <ul>
+              <player-select-attribute
+                v-for="attribute in attributes"
+                :key="attribute.name"
+                :name="attribute.name"
+                :value="attribute.value"
+                :bonuses="player.bonuses"
+              />
+            </ul>
+            <player-select-bonuses :bonuses="player.bonuses" />
+          </div>
         </div>
       </div>
-    </div>
-    <div class="player-select--information">
-      <h3>{{ player.name }}</h3>
-      <p>{{ player.position }}, nivå {{ player.level }}</p>
+      <div class="player-select--information">
+        <h3>{{ player.name }}</h3>
+        <p>{{ player.position }}, nivå {{ player.level }}</p>
+      </div>
     </div>
   </div>
 </template>
@@ -63,36 +68,53 @@ export default {
 <style lang="scss" scoped>
 @import "../../scss/variables";
 .player-select {
-  margin: 1rem 0;
-  width: 45%;
-  img {
-    width: 100%;
-  }
+  margin: 0.25rem;
+  padding: 0.25rem;
+  width: calc(50% - 1rem - 8px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 4px $white solid;
+  border-radius: $border-radius;
 
-  .player-select--portrait {
-    position: relative;
-
-    .player-select--attributes {
-      position: absolute;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
-      padding: 1rem;
-      background-color: rgba(0, 0, 0, 0.75);
-      color: $white;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      transition: 250ms;
-      opacity: 0;
-
-      &.show {
-        opacity: 1;
+  .player-select--inner {
+    .player-select--portrait {
+      position: relative;
+      .player-select--info-icon {
+        position: absolute;
+        top: 0.5rem;
+        right: 0.5rem;
+        color: $white;
+        font-size: 1.5rem;
+        line-height: 1.5rem;
+        text-shadow: 0 0 0.5rem #ccc;
+      }
+      img {
+        width: 100%;
       }
 
-      ul {
-        list-style-type: none;
+      .player-select--attributes {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        padding: 1rem;
+        background-color: rgba(0, 0, 0, 0.75);
+        color: $white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: 250ms;
+        opacity: 0;
+
+        &.show {
+          opacity: 1;
+        }
+
+        ul {
+          list-style-type: none;
+        }
       }
     }
   }
