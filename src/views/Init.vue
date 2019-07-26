@@ -2,7 +2,12 @@
   <div class="init">
     <GameSegment :buttons="buttons">
       <loading-icon v-if="players.length === 0" />
-      <player-select-list v-if="players.length > 0" :players="players" />
+      <player-select-list
+        v-if="players.length > 0"
+        :players="players"
+        @onError="onError"
+        @onErrorSolved="onErrorSolved"
+      />
     </GameSegment>
   </div>
 </template>
@@ -20,7 +25,8 @@ export default {
       buttons: [
         {
           title: "Skapa",
-          route: "play"
+          route: "play",
+          isError: false
         }
       ]
     };
@@ -33,7 +39,15 @@ export default {
     ...mapActions({
       loadPlayers: "loadPlayers",
       loadBonuses: "loadBonuses"
-    })
+    }),
+    onError: function() {
+      this.buttons[0].title = "Du måste ha exakt två spelare valda";
+      this.buttons[0].isError = true;
+    },
+    onErrorSolved: function() {
+      this.buttons[0].title = "Skapa";
+      this.buttons[0].isError = false;
+    }
   },
   computed: mapState({
     players: state => state.players.youth

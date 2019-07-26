@@ -48,9 +48,9 @@
     "attributes": {
       "charisma": 1,
       "constitution": 3,
-      "dexterity": 2,
+      "dexterity": 1,
       "strength": 3,
-      "intelligence": 1
+      "intelligence": 2
     },
     "bonuses": [],
     "image": "hugo-andersson.jpg"

@@ -1,5 +1,5 @@
 <template>
-  <div class="player-select">
+  <div :class="playerClasses">
     <div class="player-select--inner">
       <div class="player-select--portrait" v-on:click="toggleAttributes">
         <p class="player-select--info-icon">
@@ -21,9 +21,12 @@
           </div>
         </div>
       </div>
-      <div class="player-select--information">
+      <div class="player-select--information" v-on:click="onSelect">
         <h3>{{ player.name }}</h3>
-        <p>{{ player.position }}, nivå {{ player.level }}</p>
+        <div class="player-select--information-bottom">
+          <p>{{ player.position }}, nivå {{ player.level }}</p>
+          <p class="fas fa-check"></p>
+        </div>
       </div>
     </div>
   </div>
@@ -36,7 +39,8 @@ export default {
   name: "PlayerSelect",
   components: { PlayerSelectBonuses, PlayerSelectAttribute },
   props: {
-    player: Object
+    player: Object,
+    isSelected: Boolean
   },
   data() {
     return {
@@ -46,6 +50,9 @@ export default {
   methods: {
     toggleAttributes: function() {
       this.showAttributes = !this.showAttributes;
+    },
+    onSelect: function() {
+      this.$emit("onTogglePlayer");
     }
   },
   computed: {
@@ -60,6 +67,9 @@ export default {
         name: attributeName,
         value: this.player.attributes[attributeName]
       }));
+    },
+    playerClasses: function() {
+      return `player-select ${this.isSelected && "selected"}`;
     }
   }
 };
@@ -74,7 +84,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 4px $white solid;
+  border: 4px rgba($white, 0.25) dashed;
   border-radius: $border-radius;
 
   .player-select--inner {
@@ -114,6 +124,34 @@ export default {
 
         ul {
           list-style-type: none;
+        }
+      }
+    }
+    .player-select--information {
+      .player-select--information-bottom {
+        display: flex;
+        justify-content: space-between;
+        p {
+          font-size: 0.85rem;
+          &.fas {
+            opacity: 0.25;
+            color: $white;
+          }
+        }
+      }
+    }
+  }
+
+  &.selected {
+    border-color: $white;
+    border-style: solid;
+
+    .player-select--information {
+      .player-select--information-bottom {
+        p {
+          &.fas {
+            opacity: 1;
+          }
         }
       }
     }

@@ -4,7 +4,11 @@
       <slot />
     </div>
     <div class="game-segment--buttons">
-      <div v-for="(button, index) in buttons" v-bind:key="index">
+      <div
+        v-for="(button, index) in buttons"
+        v-bind:key="index"
+        :class="button.isError && 'error'"
+      >
         <router-link tag="a" :to="button.route">
           {{ button.title }}
         </router-link>
@@ -22,7 +26,8 @@ export default {
       type: Array,
       default: () => ({
         title: "",
-        route: ""
+        route: "",
+        isError: false
       })
     }
   }
@@ -75,6 +80,18 @@ export default {
         }
         &:visited {
           color: $white;
+        }
+      }
+
+      &.error {
+        a {
+          font-style: italic;
+          pointer-events: none;
+
+          &::after {
+            font-family: "Font Awesome 5 Free", serif;
+            content: "\f25b";
+          }
         }
       }
     }
