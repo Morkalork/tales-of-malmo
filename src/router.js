@@ -3,6 +3,7 @@ import Router from "vue-router";
 import Intro from "./views/Intro.vue";
 import Init from "./views/Init";
 import Help from "./views/Help";
+import Start from "./views/game-modules/Start";
 
 Vue.use(Router);
 
@@ -24,6 +25,14 @@ export default new Router({
       path: "/help",
       name: "help",
       component: Help
+    },
+    {
+      path: "/start",
+      name: "start",
+      component: Start
     }
-  ]
+  ],
+  scrollBehavior() {
+    return { x: 0, y: 0 };
+  }
 });

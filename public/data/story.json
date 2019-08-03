@@ -1,0 +1,33 @@
+{
+  "maps": [
+    {
+      "component": "start",
+      "stages": [
+        {
+          "description": [
+            "'Sånna hossor' säger {player1} och går ner för trappen från Stadion. 'Di kunne ju ente ens passa ordentligt!'",
+            "'Eouh, så kassa. Ja, vi hade piskat dem varje dau e veckan!' svarar {player2} gåendes brevid. Solen har gått ner över Malmö stad.",
+            "Utan att se sig för så vandrar våra två protagonister rakt in i en grupp med {groupType} som skriker 'Ey, va fan!?'",
+            "Det vankas bråk utanför sektion 8..."
+          ],
+          "enemyLevel": 1,
+          "event": "fight",
+          "next": "Slåss",
+          "groupType": "motståndare",
+          "associations": ["LB07"]
+        },
+        {
+          "description": [
+            "Ni slickar era sår och tittar ut över gamla stadion, i Malmö är rivaliteten total, de här andra klubbgängen skojar inte...",
+            "När ni passar förbi Erics hak så hör ni ett gäng fulla supportrar stå och skråla ovanför er, ni bestämmer er för att skråla med!"
+          ],
+          "enemyLevel": 1,
+          "event": "supporters",
+          "next": "Sjung",
+          "groupType": "supportrar",
+          "associations": ["MFF Support"]
+        }
+      ]
+    }
+  ]
+}

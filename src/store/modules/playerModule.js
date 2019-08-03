@@ -1,4 +1,4 @@
-import { NOTIFICATION_TYPES } from "./notificationModule";
+import dispatchNetworkError from "./helpers/dispatchNetworkError";
 
 export const SET_PLAYERS = "SET_PLAYERS";
 
@@ -24,13 +24,7 @@ const playerModule = {
         .then(players => {
           commit(SET_PLAYERS, players);
         })
-        .catch(() =>
-          dispatch("setNotification", {
-            message:
-              "Kunde inte hämta spelardata, jag har ingen aning om hur jag ska hantera detta... :(",
-            notificationType: NOTIFICATION_TYPES.ERROR
-          })
-        );
+        .catch(() => dispatchNetworkError(dispatch, "spelar-data"));
     }
   }
 };

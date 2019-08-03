@@ -3,20 +3,20 @@
     <div class="intro">
       <MainHeader />
       <p>
-        Välkommen till Tales of Malmö, ett rollspel där du klär dig i rollen av
+        Välkommen till Tales of Malmö, ett rollspel där du iklär dig rollen av
         de episka heralder som lyfter vår gråa Kockumsvardag, förgyller våran
         bleka tisdags-falaffel och dränker ljudet av betongdjungelens
         handgranatsvrål.
       </p>
       <p>
-        Här tar du dig an fotbolls-Sverige som en grupp av de finaste spelare
+        Här tar du dig an fotbollssverige som en grupp av de finaste spelare
         vårt land har att erbjuda. Utmaningar i form av matcher med motståndare
         från runt om i landet, slagsmål med fotbollsanalfabeta
         medgångssupportrar samt kampsångstifon.
       </p>
       <p>
         Tryck starta och se hur långt ditt lag tar sig, se sedan om du kan nå
-        highscoresvenskan och sätta ditt namn på toppen!
+        den öppna highscore-tabellen och sätta ditt namn på toppen!
       </p>
       <p>För mer information, tryck Hjälp uppe i menyn (i toppajävelen).</p>
     </div>

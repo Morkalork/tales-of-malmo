@@ -25,7 +25,7 @@ export default {
       buttons: [
         {
           title: "Skapa",
-          route: "play",
+          route: "start", // To be set in our watcher
           isError: false
         }
       ]

@@ -5,30 +5,19 @@
 npm install
 ```
 
-### Compiles and hot-reloads for development
+## Build and run
+
+To build, with a watch, run:
+
 ```
 npm run serve
-```
 
-### Compiles and minifies for production
-```
+# or to just build and not watch
 npm run build
 ```
 
-### Run your tests
-```
-npm run test
-```
+To start a server run:
 
-### Lints and fixes files
 ```
-npm run lint
+node ./server
 ```
-
-### Run your unit tests
-```
-npm run test:unit
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).

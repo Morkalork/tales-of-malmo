@@ -8,11 +8,11 @@
 </template>
 
 <script>
-import translateAttributes from "../../helpers/translateAttributes";
+import translateAttributes from "../helpers/translateAttributes";
 import { mapState } from "vuex";
 
 export default {
-  name: "PlayerSelectAttribute",
+  name: "Attribute",
   props: {
     name: String,
     value: Number,
@@ -20,7 +20,7 @@ export default {
   },
   computed: {
     ...mapState({
-      allBonuses: state => state.bonuses.items
+      allBonuses: state => state.bonuses
     }),
     extraPoints() {
       return this.allBonuses

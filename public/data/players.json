@@ -1,5 +1,6 @@
 [
   {
+    "id": 1,
     "level": 1,
     "name": "Tim Prica",
     "position": "Anfallare",
@@ -14,6 +15,7 @@
     "image": "tim-prica.jpg"
   },
   {
+    "id": 2,
     "level": 1,
     "name": "Anel Ahmedhodzic",
     "position": "Försvarare",
@@ -28,6 +30,7 @@
     "image": "anel-ahmedhodzic.jpg"
   },
   {
+    "id": 3,
     "level": 1,
     "name": "Pavle Vagic",
     "position": "Mittfältare",
@@ -42,6 +45,7 @@
     "image": "pavle-vagic.jpg"
   },
   {
+    "id": 4,
     "level": 1,
     "name": "Hugo Andersson",
     "position": "Försvarare",

@@ -21,10 +21,18 @@ export default {
   components: { TopMenu, Notification },
   created() {
     this.loadBonuses();
+    this.loadStory();
+    this.loadEnemies();
+    this.loadAssociations();
+    this.loadFightActions();
   },
   methods: {
     ...mapActions({
-      loadBonuses: "loadBonuses"
+      loadBonuses: "loadBonuses",
+      loadStory: "loadStory",
+      loadEnemies: "loadEnemies",
+      loadAssociations: "loadAssociations",
+      loadFightActions: "loadFightActions"
     })
   },
   computed: {

@@ -26,6 +26,7 @@ export default {
 <style lang="scss" scoped>
 @import "../scss/variables.scss";
 .top-menu {
+  height: 5vh;
   nav {
     margin: 0.25rem 1rem;
     padding-bottom: 0.25rem;

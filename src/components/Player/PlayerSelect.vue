@@ -1,27 +1,22 @@
 <template>
   <div :class="playerClasses">
-    <div class="player-select--inner">
-      <div class="player-select--portrait" v-on:click="toggleAttributes">
-        <p class="player-select--info-icon">
-          <i class="fas fa-info-circle"></i>
+    <div class="player-select--inner" v-on:click="onSelect">
+      <div class="player-select--portrait">
+        <p class="player-select--info-icon" v-on:click.stop="toggleAttributes">
+          <i :class="getAttributeIconClasses()"></i>
         </p>
         <img :src="imageSrc" alt="player.name" />
         <div :class="getAttributeClasses">
           <div>
-            <ul>
-              <player-select-attribute
-                v-for="attribute in attributes"
-                :key="attribute.name"
-                :name="attribute.name"
-                :value="attribute.value"
-                :bonuses="player.bonuses"
-              />
-            </ul>
+            <attributes
+              :player-attributes="player.attributes"
+              :player-bonuses="player.bonuses"
+            />
             <player-select-bonuses :bonuses="player.bonuses" />
           </div>
         </div>
       </div>
-      <div class="player-select--information" v-on:click="onSelect">
+      <div class="player-select--information">
         <h3>{{ player.name }}</h3>
         <div class="player-select--information-bottom">
           <p>{{ player.position }}, nivå {{ player.level }}</p>
@@ -33,11 +28,12 @@
 </template>
 
 <script>
-import PlayerSelectAttribute from "./PlayerSelectAttribute";
 import PlayerSelectBonuses from "./PlayerSelectBonuses";
+import getProfileImage from "../../helpers/getProfileImage";
+import Attributes from "../Attributes";
 export default {
   name: "PlayerSelect",
-  components: { PlayerSelectBonuses, PlayerSelectAttribute },
+  components: { Attributes, PlayerSelectBonuses },
   props: {
     player: Object,
     isSelected: Boolean
@@ -53,20 +49,17 @@ export default {
     },
     onSelect: function() {
       this.$emit("onTogglePlayer");
+    },
+    getAttributeIconClasses: function() {
+      return `fas fa-${this.showAttributes ? "times-circle" : "info-circle"}`;
     }
   },
   computed: {
     imageSrc: function() {
-      return `/public/profiles-pictures/${this.player.image}`;
+      return getProfileImage(this.player.image);
     },
     getAttributeClasses: function() {
       return `player-select--attributes ${this.showAttributes ? "show" : ""}`;
-    },
-    attributes: function() {
-      return Object.keys(this.player.attributes).map(attributeName => ({
-        name: attributeName,
-        value: this.player.attributes[attributeName]
-      }));
     },
     playerClasses: function() {
       return `player-select ${this.isSelected && "selected"}`;
@@ -98,6 +91,7 @@ export default {
         font-size: 1.5rem;
         line-height: 1.5rem;
         text-shadow: 0 0 0.5rem #ccc;
+        z-index: 999;
       }
       img {
         width: 100%;
@@ -120,10 +114,6 @@ export default {
 
         &.show {
           opacity: 1;
-        }
-
-        ul {
-          list-style-type: none;
         }
       }
     }

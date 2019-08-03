@@ -1,0 +1,86 @@
+{
+  "actions": [
+    {
+      "attribute": "charisma",
+      "lines": [
+        "{player1} hjälper {player2} upp från gräset efter en regelrätt tackling",
+        "Med ett leende charmar sig {player1} förbi {player2}",
+        "{player1} spelar så fruktansvärt sportsligt att {player2} tappar fattningen och gör självmål"
+      ]
+    },
+    {
+      "attribute": "constitution",
+      "lines": [
+        "{player1} använder sin stabila fysik för att springa ifrån {player2}",
+        "{player1} springer snabbt ifrån {player2}",
+        "Utan att tänka så löper {player1} förbi {player2} och gör mål"
+      ]
+    },
+    {
+      "attribute": "dexterity",
+      "lines": [
+        "{player1} fintar till höger, sen till vänster och kommer förbi {player2}",
+        "Utan att tänka så använder {player1} sin fina teknika för att ta sig förbi {player2}",
+        "{player1} introducerar {player2} till varmkorven uppe på läktaren när han fintar sig förbi och lägger bollen i mål"
+      ]
+    },
+    {
+      "attribute": "strength",
+      "lines": [
+        "{player1} håller undan bollen från {player2} på ett starkt sätt",
+        "{player1} trycker till {player2} på ett balanserat men tufft sätt",
+        "Med bravur skjuter {player1} bollen i mål rakt framför {player2}"
+      ]
+    },
+    {
+      "attribute": "intelligence",
+      "lines": [
+        "{player1} tar en stabil löpning och plockar ner en långboll rakt framför {player2}",
+        "{player1} utnyttjar det faktum att {player2} tänker på annat och tar sig förbi",
+        "{player1} känner vindens riktning och utnyttjar den för att placera bollen förbi {player2} in i mål"
+      ]
+    }
+  ],
+  "inactions": [
+    {
+      "attribute": "charisma",
+      "lines": [
+        "{player1} känner sig karaktärslös och gör ingenting",
+        "{player1} känner sig lite otrevlig och tar ett steg tillbaka",
+        "{player1} blir lite nedstämd och avvaktar"
+      ]
+    },
+    {
+      "attribute": "constitution",
+      "lines": [
+        "{player1} är trött och gör ingenting",
+        "{player1} känner smaken av mjölksyra i munnen och tar en liten paus",
+        "{player1} får kramp och behöver sträcka lite på benen"
+      ]
+    },
+    {
+      "attribute": "dexterity",
+      "lines": [
+        "{player1} tvivlar på sin teknik och gör ingenting",
+        "{player1} dribblar av sig själv bollen",
+        "{player1} snubblar på sitt eget benskydd"
+      ]
+    },
+    {
+      "attribute": "strength",
+      "lines": [
+        "{player1} känner sig svag och gör ingenting",
+        "{player1} skjuter så hårt att bollen hamnar i Limhamn",
+        "{player1} satsar allt på styrka och missar bollen"
+      ]
+    },
+    {
+      "attribute": "intelligence",
+      "lines": [
+        "{player1} känner sig lite dum och gör ingenting",
+        "{player1} gör en otal felbedömning av bollbana och springer av plan",
+        "{player1} väggspelar med en motståndare som tar bollen"
+      ]
+    }
+  ]
+}

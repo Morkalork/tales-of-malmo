@@ -92,7 +92,7 @@ export default {
   components: { GoBack, ListItem, GameSegment },
   computed: {
     ...mapState({
-      bonuses: state => state.bonuses.items
+      bonuses: state => state.bonuses
     })
   },
   methods: {

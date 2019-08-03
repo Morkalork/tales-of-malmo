@@ -9,9 +9,10 @@
         v-bind:key="index"
         :class="button.isError && 'error'"
       >
-        <router-link tag="a" :to="button.route">
+        <router-link v-if="button.route" tag="a" :to="button.route">
           {{ button.title }}
         </router-link>
+        <a v-if="!button.route" v-on:click="onAction()">{{ button.title }}</a>
       </div>
     </div>
   </div>
@@ -22,6 +23,7 @@ export default {
   name: "GameSegment",
   props: {
     title: String,
+    stayDown: Boolean, // Should it always scroll down
     buttons: {
       type: Array,
       default: () => []
@@ -33,6 +35,31 @@ export default {
       }
        */
     }
+  },
+  data() {
+    return {
+      height: 0
+    };
+  },
+  mounted() {
+    // TODO: Please, for the love of Rosenberg himself, find a better way to handle "always scroll to bottom"!
+    if (this.stayDown) {
+      const segment = this.$el;
+      setInterval(() => {
+        if (segment.clientHeight !== this.height) {
+          this.height = segment.clientHeight;
+          window.scrollTo({
+            top: document.body.scrollHeight,
+            behavior: "smooth"
+          });
+        }
+      }, 500);
+    }
+  },
+  methods: {
+    onAction: function() {
+      this.$emit("onButtonClick");
+    }
   }
 };
 </script>
@@ -43,7 +70,7 @@ export default {
   width: 100%;
   min-height: 100%;
   .game-segment--content {
-    min-height: calc(85vh - 2rem);
+    min-height: calc(80vh - 2rem);
     padding: 1rem;
     color: $blue-3;
     display: flex;

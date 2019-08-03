@@ -6,49 +6,55 @@
       kan klicka på deras profilbilder för att se mer information.
     </p>
     <player-select
-      v-for="(player, index) in players"
+      v-for="player in players"
       :player="player"
       :key="player.name"
-      :is-selected="selectedIndexes.includes(index)"
-      @onTogglePlayer="togglePlayer(index)"
+      :is-selected="selectedIds.includes(player.id)"
+      @onTogglePlayer="togglePlayer(player)"
     />
   </div>
 </template>
 
 <script>
 import PlayerSelect from "./PlayerSelect";
+import { mapActions, mapState } from "vuex";
 export default {
   name: "PlayerSelectList",
   components: { PlayerSelect },
   data() {
     return {
-      selectedIndexes: [0, 1]
+      selectedIds: []
     };
   },
   props: {
     players: Array
   },
   methods: {
-    togglePlayer: function(index) {
-      let newSelectedIndexes = [];
-      if (this.selectedIndexes.includes(index)) {
-        newSelectedIndexes = this.selectedIndexes.filter(i => i !== index);
+    ...mapActions(["addToSquad", "removeFromSquad"]),
+    togglePlayer: function(player) {
+      if (this.selectedIds.includes(player.id)) {
+        this.removeFromSquad(player);
       } else {
-        newSelectedIndexes = [...this.selectedIndexes, index];
+        this.addToSquad(player);
       }
-
-      if (
-        newSelectedIndexes.length !== 2 &&
-        this.selectedIndexes.length === 2
-      ) {
-        this.$emit("onError");
-      } else if (
-        newSelectedIndexes.length === 2 &&
-        this.selectedIndexes.length !== 2
-      ) {
-        this.$emit("onErrorSolved");
+    }
+  },
+  computed: {
+    ...mapState({
+      squad: state => state.squad.players
+    })
+  },
+  watch: {
+    squad: {
+      immediate: true,
+      handler: function(newSquad) {
+        this.selectedIds = newSquad.map(player => player.id);
+        if (this.selectedIds.length !== 2) {
+          this.$emit("onError");
+        } else {
+          this.$emit("onErrorSolved");
+        }
       }
-      this.selectedIndexes = newSelectedIndexes;
     }
   }
 };
