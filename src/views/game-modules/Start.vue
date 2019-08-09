@@ -1,24 +1,18 @@
 <template>
-  <game-segment
-    @onButtonClick="onActionClick"
-    :buttons="buttons"
-    :stay-down="true"
-  >
+  <game-segment @onButtonClick="onActionClick" :buttons="buttons">
     <div class="game--start" v-if="map">
       <p><em>Och spelet tar sin början...</em></p>
       <br />
-      <section
-        class="game--start-segment"
-        v-for="(s, stageIndex) in stages"
-        :key="stageIndex"
-      >
-        <p v-for="(line, index) in getStageLines(s)" :key="index">{{ line }}</p>
+      <section class="game--start-segment">
+        <p v-for="(line, index) in getStageLines(stage)" :key="index">
+          {{ line }}
+        </p>
         <br />
         <event
           v-if="stageEventActive"
-          :event-type="s.event"
-          :associations="s.associations"
-          :enemy-level="s.enemyLevel"
+          :event-type="stage.event"
+          :associations="stage.associations"
+          :enemy-level="stage.enemyLevel"
           :squad="squad"
         />
       </section>
@@ -47,10 +41,22 @@ export default {
     };
   },
   methods: {
-    ...mapActions(["setCurrentStage"]),
+    ...mapActions(["setCurrentStage", "startFighting"]),
     onActionClick: function() {
-      if (this.stage.event !== "continue") {
+      if (this.stage.event === "continue") {
+        // Do something
+        console.log("continue!");
+      } else if (!this.stageEventActive) {
         this.stageEventActive = true;
+        this.buttons[0].title = "Aktivera!";
+      } else if (this.stageEventActive) {
+        switch (this.stage.event) {
+          case "fight":
+            this.startFighting();
+            break;
+          default:
+            break;
+        }
       }
     },
     getStageLines(stage) {

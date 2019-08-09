@@ -19,6 +19,8 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
+
 export default {
   name: "GameSegment",
   props: {
@@ -38,14 +40,21 @@ export default {
   },
   data() {
     return {
-      height: 0
+      height: 0,
+      intervalId: 0
     };
   },
   mounted() {
     // TODO: Please, for the love of Rosenberg himself, find a better way to handle "always scroll to bottom"!
     if (this.stayDown) {
+      this.startAutoScrolling();
+    }
+  },
+  methods: {
+    startAutoScrolling() {
+      console.log("StARTING autoScrOllINg");
       const segment = this.$el;
-      setInterval(() => {
+      this.intervalId = setInterval(() => {
         if (segment.clientHeight !== this.height) {
           this.height = segment.clientHeight;
           window.scrollTo({
@@ -54,11 +63,28 @@ export default {
           });
         }
       }, 500);
-    }
-  },
-  methods: {
+    },
+    stopAutoScrolling() {
+      if (this.intervalId) {
+        clearTimeout(this.intervalId);
+      }
+    },
     onAction: function() {
       this.$emit("onButtonClick");
+    }
+  },
+  computed: {
+    ...mapState({
+      isAutoScrollActive: state => state.settings.isAutoScrollActive
+    })
+  },
+  watch: {
+    isAutoScrollActive: function(newValue) {
+      if (newValue) {
+        this.startAutoScrolling();
+      } else {
+        this.stopAutoScrolling();
+      }
     }
   }
 };

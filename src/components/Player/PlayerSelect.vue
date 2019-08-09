@@ -5,7 +5,12 @@
         <p class="player-select--info-icon" v-on:click.stop="toggleAttributes">
           <i :class="getAttributeIconClasses()"></i>
         </p>
-        <img :src="imageSrc" alt="player.name" />
+        <div class="player-select--image">
+          <img v-if="player.image" :src="imageSrc" alt="player.name" />
+          <span v-if="!player.image">
+            <i class="fas fa-user-circle"></i>
+          </span>
+        </div>
         <div :class="getAttributeClasses">
           <div>
             <attributes
@@ -20,7 +25,7 @@
         <h3>{{ player.name }}</h3>
         <div class="player-select--information-bottom">
           <p>{{ player.position }}, nivå {{ player.level }}</p>
-          <p class="fas fa-check"></p>
+          <p v-if="!hideCheck" class="fas fa-check"></p>
         </div>
       </div>
     </div>
@@ -36,7 +41,8 @@ export default {
   components: { Attributes, PlayerSelectBonuses },
   props: {
     player: Object,
-    isSelected: Boolean
+    isSelected: Boolean,
+    hideCheck: Boolean
   },
   data() {
     return {
@@ -62,7 +68,9 @@ export default {
       return `player-select--attributes ${this.showAttributes ? "show" : ""}`;
     },
     playerClasses: function() {
-      return `player-select ${this.isSelected && "selected"}`;
+      return `player-select ${this.isSelected && "selected"} ${
+        this.player.image ? "" : "no-image"
+      }`;
     }
   }
 };
@@ -80,9 +88,23 @@ export default {
   border: 4px rgba($white, 0.25) dashed;
   border-radius: $border-radius;
 
+  &.no-image {
+    .player-select--inner {
+      .player-select--portrait {
+        align-items: center;
+      }
+    }
+  }
+
   .player-select--inner {
+    width: 100%;
     .player-select--portrait {
+      width: 100%;
       position: relative;
+      display: flex;
+      justify-content: center;
+      min-height: 11rem;
+
       .player-select--info-icon {
         position: absolute;
         top: 0.5rem;
@@ -95,6 +117,10 @@ export default {
       }
       img {
         width: 100%;
+      }
+
+      .fa-user-circle {
+        font-size: 4rem;
       }
 
       .player-select--attributes {

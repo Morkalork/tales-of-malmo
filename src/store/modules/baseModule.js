@@ -1,23 +1,14 @@
-import dispatchNetworkError from "./helpers/dispatchNetworkError";
+import loadData from "../../helpers/loadData";
 
 export const SET_BONUSES = "SET_BONUSES";
 export const SET_ASSOCIATIONS = "SET_ASSOCIATIONS";
 export const SET_ENEMIES = "SET_ENEMIES";
-export const SET_FIGHT_ACTIONS = "SET_FIGHT_ACTIONS";
-
-const loadData = (fileName, dispatch, onSuccess) => {
-  fetch(`/public/data/${fileName}.json`)
-    .then(response => response.json())
-    .then(onSuccess)
-    .catch(() => dispatchNetworkError(dispatch, fileName));
-};
 
 const baseModule = {
   state: {
     bonuses: [],
     associations: [],
-    enemies: [],
-    fightActions: []
+    enemies: []
   },
   mutations: {
     [SET_BONUSES](state, bonuses) {
@@ -28,9 +19,6 @@ const baseModule = {
     },
     [SET_ENEMIES](state, enemies) {
       state.enemies = enemies;
-    },
-    [SET_FIGHT_ACTIONS](state, fightActions) {
-      state.fightActions = fightActions;
     }
   },
   actions: {
@@ -45,11 +33,6 @@ const baseModule = {
     },
     loadEnemies({ commit, dispatch }) {
       loadData("enemies", dispatch, enemies => commit(SET_ENEMIES, enemies));
-    },
-    loadFightActions({ commit, dispatch }) {
-      loadData("fight-actions", dispatch, fightActions =>
-        commit(SET_FIGHT_ACTIONS, fightActions)
-      );
     }
   }
 };

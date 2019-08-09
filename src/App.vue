@@ -27,13 +27,13 @@ export default {
     this.loadFightActions();
   },
   methods: {
-    ...mapActions({
-      loadBonuses: "loadBonuses",
-      loadStory: "loadStory",
-      loadEnemies: "loadEnemies",
-      loadAssociations: "loadAssociations",
-      loadFightActions: "loadFightActions"
-    })
+    ...mapActions([
+      "loadBonuses",
+      "loadStory",
+      "loadEnemies",
+      "loadAssociations",
+      "loadFightActions"
+    ])
   },
   computed: {
     ...mapState({

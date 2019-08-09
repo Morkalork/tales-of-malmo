@@ -1,43 +1,72 @@
 <template>
   <div class="fight-scene">
-    <p><strong>Bråk!</strong></p>
+    <h3>Bråk!</h3>
     <p>
-      Du hamnar i ett bråk och ni ställer upp på följande sätt:
+      Du hamnar i en spontan-match och ni ställer upp på följande sätt:
     </p>
-    <ul>
-      <list-item v-for="member in this.squad" :key="member.id">{{
-        member.name
-      }}</list-item>
-    </ul>
+    <div class="fighters">
+      <player-select
+        v-for="member in this.squad"
+        :key="member.id"
+        :player="member"
+        :is-selected="true"
+        :hide-check="true"
+      />
+    </div>
     <p>
       Framför er så står en grupp frustande motståndare, de kommer ifrån
       {{ this.fullAssociations }} och ställer upp så här:
     </p>
-    <ul>
-      <list-item v-for="enemy in this.enemies" :key="enemy.id">{{
-        enemy.name
-      }}</list-item>
-    </ul>
+    <div class="fighters">
+      <player-select
+        v-for="enemy in this.enemies"
+        :key="enemy.id"
+        :player="enemy"
+        :is-selected="true"
+        :hide-check="true"
+      />
+    </div>
+    <div class="sequences" v-if="sequences.length > 0">
+      <h3>Referat:</h3>
+      <fight-sequence
+        v-for="(sequence, index) in sequences"
+        :key="index"
+        :line="sequence.line"
+        :score="sequence.score"
+        :attribute="sequence.attribute"
+      />
+    </div>
   </div>
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapActions, mapState } from "vuex";
 import random from "../../helpers/random";
-import ListItem from "../ListItem";
+import PlayerSelect from "../Player/PlayerSelect";
+import generateAttributes from "../../helpers/generateAttributes";
+import calculateFight from "../../helpers/calculate-fight";
+import FightSequence from "./FightSequence";
 
 export default {
   name: "FightScene",
-  components: { ListItem },
+  components: { FightSequence, PlayerSelect },
   props: {
     enemyLevel: Number,
     associations: Array,
     squad: Array
   },
+  data() {
+    return {
+      sequences: []
+    };
+  },
   computed: {
     ...mapState({
       enemyRooster: state => state.enemies,
-      availableAssociations: state => state.associations
+      availableAssociations: state => state.associations,
+      isFighting: state => state.fight.isFighting,
+      actions: state => state.fight.actions,
+      inactions: state => state.fight.inactions
     }),
     fullAssociations: function() {
       return this.availableAssociations
@@ -56,7 +85,8 @@ export default {
           ...e,
           associationData: this.availableAssociations.find(
             aa => aa.name === e.association
-          )
+          ),
+          attributes: generateAttributes(e.attributeTotal)
         }));
 
       const enemyTroops = [];
@@ -68,14 +98,65 @@ export default {
 
       return enemyTroops;
     }
+  },
+  methods: {
+    ...mapActions(["activateAutoScroll", "deactivateAutoScroll"]),
+    executeFight: function(sequences) {
+      const [sequence] = sequences.splice(0, 1);
+
+      console.log("SEQUENCES: ", this.sequences);
+      this.sequences.push(sequence);
+
+      if (sequences.length > 0) {
+        setTimeout(() => this.executeFight(sequences), 3000);
+      } else {
+        this.deactivateAutoScroll();
+      }
+    }
+  },
+  watch: {
+    isFighting: function(newValue, oldValue) {
+      if (newValue && !oldValue) {
+        this.activateAutoScroll();
+        const sequences = calculateFight(
+          this.squad,
+          this.enemies,
+          10,
+          this.actions,
+          this.inactions
+        );
+
+        this.executeFight(sequences);
+      }
+    }
   }
 };
 </script>
 
 <style lang="scss" scoped>
+@import "../../scss/variables";
 .fight-scene {
-  ul {
+  .fighters {
+    display: flex;
     margin: 1rem 0;
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/deep/ .fight-sequence {
+  &:last-child {
+    .icon {
+      animation: 3s spin;
+      color: black;
+    }
   }
 }
 </style>

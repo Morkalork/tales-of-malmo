@@ -6,6 +6,8 @@ import baseModule from "./modules/baseModule";
 import storyModule from "./modules/storyModule";
 import storePersistence from "./storePersistence";
 import squadModule from "./modules/squadModule";
+import fightModule from "./modules/fightModule";
+import settingsModule from "./modules/settingsModule";
 
 Vue.use(Vuex);
 
@@ -15,7 +17,9 @@ const store = new Vuex.Store({
     story: storyModule,
     players: playerModule,
     notification: notificationModule,
-    squad: squadModule
+    squad: squadModule,
+    fight: fightModule,
+    settings: settingsModule
   }
 });
 
